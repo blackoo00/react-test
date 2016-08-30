@@ -12,54 +12,57 @@
 	<script type="text/babel">
 		var MessageBox = React.createClass({
 			getInitialState:function(){
+				console.log('getInitialState');
 				return {
 					count: 0,
 				}
 			},
-			shouldComponentUpdate:function(nextProp,nextState){
-				console.log('shouldComponentUpdate');
-				if(nextState.count > 3) return false;
+			getDefaultProps:function(){
+				console.log('getDefaultProps');
+				return {};
+			},
+			componentWillMount:function(){
+				console.log('comonentWillMount');
+				var self = this;
 
-				return true;
+				this.timer = setInterval(function(){
+					self.setState({
+						count:self.state.count + 1,
+					})
+				},1000);
+
 			},
-			componentWillUpdate:function(nextProp,nextState){
-				console.log('componentWillUpdate');
+			componentDidMount:function(){
+				console.log('componentDidMount');
+				console.log(this.getDOMNode());
 			},
-			componentDidUpdate:function(){
-				console.log('componentDidUpdate');
+			componentWillUnmount:function(){
+				console.log('componentDisMount');
+				console.log(this.getDOMNode());
+			},
+			componentWillUnmount:function(){
+				alert('you are tring to kill me !!');
+
+				clearInterval(this.timer);
 			},
 			killMySelf:function(){
 				React.unmountComponentAtNode(document.getElementById('app'));
 			},
-			doUpdate:function(){
-				this.setState({
-					count:this.state.count + 1,
-				});
-			},
 			render:function(){
-				console.log('渲染');
 				return (
 					<div>
 						<h1>计数：{this.state.count}</h1>
 						<button onClick={this.killMySelf}>卸载掉这个组件</button>
-						<button onClick={this.doUpdate}>手动更新一下组件</button>
-						<Submessage count={this.state.count}/>
+						<Submessage/>
 					</div>
 				)
 			}
 		});
 
 		var Submessage = React.createClass({
-			componentWillReceiveProps:function(){
-				console.log('子组件将要获得prop');
-			},
-			shouldComponentUpdate:function(nextProp,nextState){
-				if(nextProp.count > 5) return false;
-				return true;
-			},
 			render:function(){
 				return(
-					<h3>当前计数是：{this.props.count}</h3>
+					<h3>写代码很有意思</h3>
 				)
 			}
 		});

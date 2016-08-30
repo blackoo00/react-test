@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script src="./js/react-0.13.4.min.js"></script>
+	<script src="./js/react-dom-0.14.0.js"></script>
+	<script src="./js/browser.min.js"></script>
+</head>
+<body>
+	<div id="app"></div>
+	<script type="text/babel">
+		var FormApp = React.createClass({
+			getInitialState:function(){
+				return{
+					inputValue: 'input value',
+					selectVlaue: 'A',
+					radioValue: 'B',
+					textareaValue: 'some text here......'
+				}
+			},
+			handleInput:function(e){
+				this.setState({
+					inputValue: e.target.value,
+				})
+			},
+			handleSelect:function(e){
+				this.setState({
+					selectVlaue: e.target.value,
+				})
+			},
+			handleSubmit:function(e){
+				e.prevenDefault();
+				console.log(e);
+			},
+			render: function(){
+				return (
+					<form onSubmit={this.handleSubmit}>
+						<input type="text" value={this.state.inputValue} onChange={this.handleInput}/><br/>
+						<select value={this.state.selectVlaue} onChange={this.handleSelect}>
+							<option value="A">A</option>
+							<option value="B">B</option>
+							<option value="C">C</option>
+							<option value="D">D</option>
+							<option value="E">E</option>
+						</select>
+						<br/>
+						<input type="radio" name="goodRadio" value="A"/>
+						<input type="radio" name="goodRadio" defaultChecked value="B"/>
+						<input type="radio" name="goodRadio" value="C"/>
+						<br/>
+						<input type="checkbox" name="goodRadio" value="A"/>
+						<input type="checkbox" name="goodRadio" value="B"/>
+						<input type="checkbox" name="goodRadio" defaultChecked value="C"/>
+						<br/>
+						<textarea defaultValue={this.state.textareaValue}></textarea>
+						<button type="submit">提交</button>
+					</form>
+				)
+			},
+		})
+		var formApp = React.render(
+		var formApp = React.render(
+			<FormApp/>,
+			document.getElementById('app')
+		)
+	</script>
+</body>
+</html>

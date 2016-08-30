@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script src="./js/react-0.13.4.min.js"></script>
+	<script src="./js/react-dom-0.14.0.js"></script>
+	<script src="./js/browser.min.js"></script>
+</head>
+<body>
+	<div id="app"></div>
+	<script type="text/babel">
+		var ClickApp = React.createClass({
+			getInitialState:function(){
+				return{
+					clickCount: 0,
+				}
+			},
+			handleClick:function(){
+				this.setState({
+					clickCount: this.state.clickCount + 1,
+				})
+			},
+			render: function(){
+				return (
+					<div>
+						<h2>点击下面按钮</h2>
+						<button onClick={this.handleClick}>点击我</button>
+						<p>你移动点击了{this.state.clickCount}</p>
+					</div>
+				)
+			},
+		})
+		var clickCommponent = React.render(
+			<ClickApp/>,
+			document.getElementById('app')
+		)
+	</script>
+</body>
+</html>

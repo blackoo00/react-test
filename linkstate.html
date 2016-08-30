@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script src="./js/react-with-addons.min.js"></script>
+	<script src="./js/react-dom-0.14.0.js"></script>
+	<script src="./js/browser.min.js"></script>
+</head>
+<body>
+	<div id="app"></div>
+	<script type="text/babel">
+		var EashForm = React.createClass({
+			mixins: [ React.addons.LinkedStateMixin ],
+			getInitialState:function(){
+				return {
+					message: 'react is awesome!',
+					isReactAwesome: true,
+				}
+			},
+			render:function(){
+				return (
+					<div>
+						<h1>我想说：{this.state.message}</h1>
+						<h2>React是不是很好用?{this.state.isReactAwesome?'非常好用!':'一般般。。。'}</h2>
+						<input type="text" valueLink={this.linkState('message')}/>
+						<br/>
+						<input type="checkbox" checkedLink={this.linkState('isReactAwesome')}/>
+						<br/>
+						<SubComp messageLink={this.linkState('message')} likeLink={this.linkState('usReactAwesome')}/>
+					</div>
+				)
+			}
+		});
+
+		var SubComp = React.createClass({
+			render:function(){
+				return (
+					<div>
+						<h3>这是个子组件哦</h3>
+						/* <SubSubComp messageLink={this.props.messageLink} likeLink={this.props.likeLink}/> */
+						<SubSubComp {...this.props}/>
+					</div>
+				)
+			}
+		});
+
+		var SubSubComp = React.createClass({
+			render:function(){
+				return (
+					<div>
+						<p>你想说什么？</p>
+						<input type="text" valueLink={this.props.messageLink}/>
+						<p>你稀罕React么？</p>
+						<input type="checkbox" checkedLink = {this.props.likeLink}/>
+					</div>
+				)
+			}
+		})
+
+		ReactDOM.render(
+			<EashForm/>,
+			document.getElementById('app')
+		)
+	</script>
+</body>
+</html>
