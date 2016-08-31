@@ -4,7 +4,6 @@
 	<meta charset="UTF-8">
 	<title></title>
 	<script src="./js/react-0.13.4.min.js"></script>
-	<script src="./js/react-dom-0.14.0.js"></script>
 	<script src="./js/browser.min.js"></script>
 </head>
 <body>
@@ -27,8 +26,8 @@
 				e.preventDefault();
 				var formData = {
 					input: this.refs.goodInput.getDOMNode().value,
-					input: this.refs.goodSelect.getDOMNode().value,
-					input: this.refs.goodTextarea.getDOMNode().value,
+					select: this.refs.goodSelect.getDOMNode().value,
+					textarea: this.refs.goodTextarea.getDOMNode().value,
 					radio: this.state.radioValue,
 					check: this.state.checkValues,
 				}
